@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb2d;
     [SerializeField] private float speed;
     private Vector2 direction;
+    private Camera cam;
 
     public Vector2 Direction {  get { return direction; } }
     
@@ -16,9 +17,22 @@ public class PlayerMovement : MonoBehaviour
         direction = Vector2.up;
     }
 
+    private void Start()
+    {
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+    }
     void Update()
     {
         Move();
+        Rotate();
+    }
+
+    void Rotate()
+    {
+        Vector2 direction = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        direction = direction.normalized;
+        transform.up = direction;
+        
     }
 
     void Move()
