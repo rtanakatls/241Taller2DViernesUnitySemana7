@@ -8,6 +8,7 @@ public class EnemyShoot : MonoBehaviour
     private float shootTimer;
     [SerializeField] private float shootDelay;
     private Transform targetTransform;
+    [SerializeField] private float shootingRange;
 
     private void Start()
     {
@@ -22,13 +23,21 @@ public class EnemyShoot : MonoBehaviour
 
     void Shoot()
     {
-        shootTimer += Time.deltaTime;
-        if (shootTimer >= shootDelay)
+        if (targetTransform == null)
         {
-            Vector2 direction = targetTransform.position - transform.position;
-            direction = direction.normalized;
-            Shoot(direction);
-            shootTimer = 0;
+            return;
+        }
+        float distance = Vector2.Distance(targetTransform.position, transform.position);
+        if (distance <= shootingRange)
+        {
+            shootTimer += Time.deltaTime;
+            if (shootTimer >= shootDelay)
+            {
+                Vector2 direction = targetTransform.position - transform.position;
+                direction = direction.normalized;
+                Shoot(direction);
+                shootTimer = 0;
+            }
         }
     }
 
@@ -60,5 +69,11 @@ public class EnemyShoot : MonoBehaviour
         obj.transform.position = transform.position;
         obj.GetComponent<BulletMovement>().SetDirection(direction);
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, shootingRange);
     }
 }

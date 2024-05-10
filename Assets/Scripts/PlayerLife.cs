@@ -6,7 +6,7 @@ public class PlayerLife : MonoBehaviour
 {
     [SerializeField] private int life;
 
-    private void ChangeLife(int value)
+    public void ChangeLife(int value)
     {
         life += value;
         if (life <= 0)
