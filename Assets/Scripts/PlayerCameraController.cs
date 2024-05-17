@@ -8,6 +8,10 @@ public class PlayerCameraController : MonoBehaviour
     [SerializeField] private List<CinemachineVirtualCamera> cameras;
 
 
+    private void Start()
+    {
+    }
+
     private void ChangeCamera(int index)
     {
         foreach (CinemachineVirtualCamera cam in cameras) 
