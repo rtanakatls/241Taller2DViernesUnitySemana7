@@ -14,6 +14,7 @@ public class ButtonChangeScene : MonoBehaviour
     
     void ChangeScene()
     {
+        PlayerStats.Reset();
         SceneManager.LoadScene(sceneName);
     }
 }

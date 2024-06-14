@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerLife : MonoBehaviour
 {
-    [SerializeField] private int life;
-    [SerializeField] private int maxLife;
+    private int life;
+    private int maxLife;
 
     private void Start()
     {
+        life = PlayerStats.life;
+        maxLife = PlayerStats.life;
         UIController.Instance.UpdateLife(life);
         UIController.Instance.UpdateLifeBar(life,maxLife);
     }

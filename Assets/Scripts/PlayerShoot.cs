@@ -7,7 +7,6 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     private PlayerMovement playerMovement;
     private float shootTimer;
-    [SerializeField] private float shootDelay;
     private Camera cam;
 
     void Awake()
@@ -28,7 +27,7 @@ public class PlayerShoot : MonoBehaviour
     void Shoot()
     {
         shootTimer += Time.deltaTime;
-        if (shootTimer >= shootDelay)
+        if (shootTimer >= PlayerStats.shootDelay)
         {
             if (Input.GetMouseButton(0))
             {
